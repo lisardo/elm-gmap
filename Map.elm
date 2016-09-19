@@ -1,10 +1,8 @@
-module Map (init, update, view) where
+module Map exposing (init, update, view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
-import Effects exposing (Effects)
 
 import Task exposing (..)
 import GoogleMap
@@ -21,17 +19,17 @@ init : Model
 init = { lat = 43, lng = 4.5 }
 
 -- UPDATE
-type Action =
+type Msg =
       North
 
-update : Action -> Model -> (Model, Effects Action)
-update action model =
-    case action of
-        North -> ( { model | lat <- model.lat + 1 }, Effects.none )
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    case msg of
+        North -> ( { model | lat = model.lat + 1 }, Cmd.none )
 
 -- VIEW
-view : Signal.Address Action -> Model -> Html
-view address model =
+view : Model -> Html Msg
+view model =
     div []
-        [ button [ onClick address North ] [ text "North" ]
+        [ button [ onClick North ] [ text "North" ]
         ]

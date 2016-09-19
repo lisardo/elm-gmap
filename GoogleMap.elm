@@ -1,4 +1,4 @@
-module GoogleMap (Position, Action) where
+module GoogleMap exposing (Position, Msg)
 
 -- import Native.GoogleMap
 
@@ -10,12 +10,12 @@ type alias Position =
     , lng : Float
     }
 
-type Action =
+type Msg =
       MapLoaded
     | MapError
 
--- createMap : Int -> Int -> Task Error Html
--- createMap = Native.GoogleMap.createMap
+createMap : Int -> Int -> Platform.Task Error Html
+createMap = Native.GoogleMap.createMap
 
 -- gmap : String -> Position -> Html
 -- gmap =
